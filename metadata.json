@@ -1,0 +1,8 @@
+{
+  "name": "AI Fitness Coach",
+  "description": "AI-powered fitness coaching and personalized workout generation application.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
