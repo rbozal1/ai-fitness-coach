@@ -93,4 +93,8 @@ export class CoachService {
 
     return of(instantPlan);
   }
+
+  getWeatherForecast(): Observable<any[]> {
+    return this.http.get<any[]>('/WeatherForecast');
+  }
 }
