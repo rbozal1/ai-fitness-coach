@@ -3,14 +3,27 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build:frontend": "cd fitness-app-ui && npm run build",
-    "build": "npm run build:frontend",
+    "build": "ng build",
     "dev": "node server.js",
     "start": "node server.js",
     "lint": "node -c server.js"
   },
   "dependencies": {
+    "@angular/common": "^21.0.0",
+    "@angular/compiler": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/forms": "^21.0.0",
+    "@angular/platform-browser": "^21.0.0",
+    "@angular/router": "^21.0.0",
     "cors": "^2.8.5",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.0.2",
+    "@angular/cli": "^21.0.2",
+    "@angular/compiler-cli": "^21.0.0",
+    "typescript": "~5.9.2"
   }
 }
