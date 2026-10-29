@@ -1,42 +1,48 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// Cloud Run dynamic port configuration
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
-//1. Add CORS policy for Angular 
-
+// 1. Add CORS policy for Angular (supporting local dev and deployed Cloud Run origin)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200") // Replace with your Angular app's URL
+            policy.AllowAnyOrigin()
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
 });
 
-// Add these before builder.Build();
+// Swagger & OpenAPI configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add services to the container.
-
+// Add controller services to container
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    // In Cloud Run, SSL termination is handled by GCP ingress load balancer.
+    // Avoid HTTPS redirection in production containers to prevent probe failures and redirect loops.
+}
 
-app.UseHttpsRedirection();
+// Optional root/health check endpoint for Cloud Run container probes
+app.MapGet("/", () => Results.Ok(new { status = "healthy", service = "FitnessApp.Api" }));
 
-app.UseCors("AllowAngularApp"); // Use the CORS policy
+app.UseCors("AllowAngularApp");
 
 app.UseAuthorization();
 
