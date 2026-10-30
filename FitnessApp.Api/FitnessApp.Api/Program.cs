@@ -26,6 +26,12 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<FitnessDbContext>();
+    db.Database.EnsureCreated(); // Or db.Database.Migrate(); if using EF Migrations
+}
+
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
@@ -43,6 +49,10 @@ else
 app.MapGet("/", () => Results.Ok(new { status = "healthy", service = "FitnessApp.Api" }));
 
 app.UseCors("AllowAngularApp");
+
+app.UseDefaultFiles();
+
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
