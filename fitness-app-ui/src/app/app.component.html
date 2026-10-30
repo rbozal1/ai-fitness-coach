@@ -1,0 +1,85 @@
+<div class="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans">
+  <!-- Top Navigation -->
+  <header class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+    <div class="flex items-center space-x-2">
+      <div class="w-8 h-8 bg-slate-900 text-emerald-400 rounded-lg flex items-center justify-center">
+        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43z"></path></svg>
+      </div>
+      <h1 class="font-bold text-lg">AI Fitness Coach</h1>
+    </div>
+    <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-500">
+      <a href="#" class="text-slate-900 font-semibold">Planner</a>
+      <a href="#" class="hover:text-slate-900">Active Routine</a>
+      <a href="#" class="hover:text-slate-900">Outdoor Forecast</a>
+    </nav>
+    <button (click)="reset()" class="px-4 py-2 text-sm font-medium text-slate-600 border border-slate-200 rounded-lg hover:bg-slate-50">Reset</button>
+  </header>
+  
+  <!-- Main Content -->
+  <main class="max-w-5xl mx-auto px-6 py-8 space-y-6">
+    <!-- Hero Section -->
+    <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-1 space-y-4">
+        <span class="px-3 py-1 text-xs font-bold text-emerald-700 bg-emerald-50 rounded-full tracking-wide">SMART TRAINING ENGINE</span>
+        <h2 class="text-3xl font-extrabold tracking-tight leading-tight">Personalized Workouts Tailored to Your Schedule</h2>
+        <p class="text-slate-500">Enter your fitness target or equipment preference, adjust your desired session duration, and get an instant custom workout routine designed for real results.</p>
+        <div class="flex gap-4 text-xs font-medium text-slate-400 pt-2">
+          <span>Instant AI Generation</span> • <span>Dynamic Volume Scaling</span> • <span>Set Tracker</span>
+        </div>
+      </div>
+      <div class="flex-1 relative rounded-xl overflow-hidden shadow-inner h-64 w-full bg-slate-900">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAO5FHFe_9AqTaNHvnqV2ygyjJyeRiZ976HJdl3EbFRMp69upIay2d8vdtqOMx9Q4dqgrnQTXyYgm20dcqfUE2jTK6mcFlwoezVuSSk2d-8BFPWcmTBsjzWN9U1PLnMNqDPPmhYLxXg4zcd8cVkDwMU0ez_Eenijud_4bcSW0W4mCibX3DPsfXO-rQPlFB9GaMc6l3MTl-X8pOtQPCpUeC8fESn9YguhW4SdYvYHXEu1Fn2-pF8t40kQ" class="w-full h-full object-cover opacity-80" alt="Training">
+        <div class="absolute bottom-4 left-4 bg-slate-900/90 text-white px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2">
+          <span class="w-2 h-2 bg-emerald-400 rounded-full"></span> Personalized Coach Ready
+        </div>
+      </div>
+    </section>
+
+    <!-- Configurator -->
+    <section class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 space-y-6">
+      <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+        <div>
+          <h3 class="text-xl font-bold">Configure Your Session</h3>
+          <p class="text-sm text-slate-500">Choose a workout style or enter a custom prompt.</p>
+        </div>
+       <div class="flex flex-wrap gap-2">
+        <button (click)="setCategory('Full Body')" class="px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-lg">Full Body</button>
+        <button (click)="setCategory('Chest & Push')" class="px-4 py-2 bg-slate-50 text-slate-700 text-sm font-semibold rounded-lg border border-slate-200 hover:bg-slate-100">Chest & Push</button>
+        <button (click)="setCategory('Legs & Quads')" class="px-4 py-2 bg-slate-50 text-slate-700 text-sm font-semibold rounded-lg border border-slate-200 hover:bg-slate-100">Legs & Quads</button>
+       </div>
+      </div>
+
+      <div class="grid md:grid-cols-[1fr_auto_auto] gap-4 items-end">
+        <div class="space-y-2">
+          <label class="text-xs font-semibold text-slate-700">Workout Goal or Focus</label>
+          <input type="text" [(ngModel)]="prompt" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+        </div>
+        <div class="space-y-2">
+          <label class="text-xs font-semibold text-slate-700">Session Duration</label>
+          <div class="flex items-center bg-slate-50 border border-slate-200 rounded-xl px-2 py-1.5">
+            <button (click)="adjustDuration(-5)" class="w-8 h-8 flex items-center justify-center text-slate-500 hover:bg-slate-200 rounded-lg">-</button>
+            <span class="px-4 font-bold text-sm">{{ duration }} <span class="text-xs font-normal text-slate-400">min</span></span>
+            <button (click)="adjustDuration(5)" class="w-8 h-8 flex items-center justify-center text-slate-500 hover:bg-slate-200 rounded-lg">+</button>
+          </div>
+        </div>
+        <button (click)="getWorkout()" class="px-6 py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 h-[50px]">Build Workout</button>
+      </div>
+    </section>
+
+    <!-- Generated Workout Results -->
+    <section *ngIf="workoutPlan.length > 0" class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 space-y-6">
+      <h3 class="text-xl font-bold">Your Active Routine</h3>
+      <div class="space-y-4">
+        <div *ngFor="let step of workoutPlan; let i = index" class="p-4 border border-slate-100 rounded-xl bg-slate-50 flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-emerald-100 text-emerald-700 font-bold rounded-lg flex items-center justify-center">{{ i + 1 }}</div>
+            <div>
+              <h4 class="font-bold text-slate-900">{{ step.exerciseName }}</h4>
+              <p class="text-xs text-slate-500 font-medium">{{ step.sets }} sets • {{ step.reps }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

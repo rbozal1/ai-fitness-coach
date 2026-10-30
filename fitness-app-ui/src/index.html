@@ -1,13 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>FitnessAppUi</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
+  <!-- Google Fonts & Tailwind CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#F0FDF4', 100: '#DCFCE7', 400: '#4ADE80', 500: '#22C55E', 600: '#16A34A', DEFAULT: '#10B981', dark: '#052E16' },
+            obsidian: '#0B0F19',
+            surface: { subtle: '#F8FAFC', card: '#FFFFFF', border: '#E2E8F0' }
+          },
+          boxShadow: {
+            'subtle-card': '0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 1px 3px -1px rgba(15, 23, 42, 0.03)',
+            'glow-emerald': '0 8px 24px -4px rgba(16, 185, 129, 0.35)',
+            'btn-shadow': '0 4px 14px rgba(11, 15, 25, 0.22)'
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body>
+<body class="bg-[#F1F5F9] text-slate-900 font-sans antialiased min-h-screen flex justify-center selection:bg-brand selection:text-white">
   <app-root></app-root>
 </body>
 </html>
