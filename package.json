@@ -1,0 +1,13 @@
+{
+  "name": "ai-fitness-coach",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "fitness-app-ui"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=fitness-app-ui",
+    "build": "npm run build --workspace=fitness-app-ui",
+    "start": "npm run start --workspace=fitness-app-ui"
+  }
+}
