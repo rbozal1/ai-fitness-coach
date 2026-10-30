@@ -59,6 +59,18 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "host": "0.0.0.0",
+            "port": 3000,
+            "allowedHosts": [
+              ".run.app",
+              ".google.com",
+              "ais-dev-j2a5uaxw7lqug7f35ou7qj-895565167037.us-east1.run.app",
+              "ais-pre-j2a5uaxw7lqug7f35ou7qj-895565167037.us-east1.run.app",
+              "localhost",
+              "127.0.0.1"
+            ]
+          },
           "configurations": {
             "production": {
               "buildTarget": "fitness-app-ui:build:production"
